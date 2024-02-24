@@ -3,7 +3,15 @@ const app = express();
 const port = process.env.PORT || 3000;
 const {isConnectToDB,connectToDB}=require('./db')
 
-connectToDB()
+
+
+try{
+
+  connectToDB()
+}
+catch(error){
+  console.log(error)
+}
 // isConnectToDB()
 
 app.get('/',(req,res)=>{
