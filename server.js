@@ -1,9 +1,13 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;;
+const port = process.env.PORT || 3000;
+const {isConnectToDB,connectToDB}=require('./db')
+
+connectToDB()
+// isConnectToDB()
 
 app.get('/',(req,res)=>{
-  res.send("hello world")
+  res.send(isConnectToDB()?"Connected to database succesfully" : "Not connected" )
 })
 
 app.get('/ping',(req,res)=>{
