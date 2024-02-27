@@ -5,6 +5,7 @@ const {isConnectToDB,connectToDB}=require('./db')
 
 const {router}=require("./routes")
 
+
 try{
 
   connectToDB()

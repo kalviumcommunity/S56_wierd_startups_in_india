@@ -2,18 +2,43 @@ const express = require('express');
 const router = express();
 
 router.get('/get',(req,res)=>{
-    res.json("get request")
+    try{
+        res.json("get request")
+    }
+    catch(error){
+        console.log(error)
+    }
+    
   })
 router.post('/post',(req,res)=>{
-    res.json("post request")
+
+    try{
+
+        res.json("post request")
+    } 
+    catch(error){
+        console.log(error)
+    }
   })
 
   router.put('/put',(req,res)=>{
-    res.json("put request")
+    try{
+
+        res.json("put request")
+    }
+    catch(error){
+        console.log(error)
+    }
   })
 
   router.delete('/delete',(req,res)=>{
-    res.json("delete request")
+    try{
+
+        res.json("delete request")
+    } 
+    catch(error){
+        console.log(error)
+    }
   })
 
   module.exports={router}
