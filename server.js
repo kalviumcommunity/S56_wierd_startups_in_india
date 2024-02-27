@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const {isConnectToDB,connectToDB}=require('./db')
 
-
+const {router}=require("./routes")
 
 try{
 
@@ -27,4 +27,5 @@ if (require.main === module) {
   });
 }
 
+app.use(router)
 module.exports = app;
