@@ -5,3 +5,5 @@
 
 
 DEPLOYED LINK : https://s56-wierd-startups-in-india.onrender.com
+
+Netlify frontend deployed link : https://s56-weird-startups-in-india.netlify.app/
