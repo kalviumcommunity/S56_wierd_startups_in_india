@@ -31,19 +31,16 @@ ul{
     font-size: xx-large;
 }
 
-.main{
-    background-image: url("C:\Users\rauts\OneDrive\Desktop\MY\Sem 2\S56_wierd_startups_in_india\Frontend\WeirdStartups\public\m2.png");
-    height: 96vh;
-    width: 99vw;
-    border: 2px solid black;
-    background-size: cover;
-}
+
 
 h1{
     color: black ;
     margin-top: 160px;
     margin-left: 360px;
+}
 
-    
-    
+.card{
+    height: 200px;
+    width: 100%;
+    background-color: aqua;
 }
