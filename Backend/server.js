@@ -29,12 +29,12 @@ if (require.main === module) {
   });
 }
 
-app.get("getStartup", async (req,res)=>{
+app.get("/getstartup", async (req,res)=>{
   const data = await startup.find({
 
 
   })
-  res.json(data)
+  res.send(data)
 })
 
 app.use(router)
