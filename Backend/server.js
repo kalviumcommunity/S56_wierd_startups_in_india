@@ -2,9 +2,9 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 const {isConnectToDB,connectToDB}=require('./db')
-
+const cors = require("cors")
 const {router}=require("./routes")
-
+const startup = require ("./Model.js")
 
 try{
 
@@ -13,8 +13,9 @@ try{
 catch(error){
   console.log(error)
 }
-// isConnectToDB()
 
+
+app.use(cors())
 app.get('/',(req,res)=>{
   res.send(isConnectToDB()?"Connected to database succesfully" : "Not connected" )
 })
@@ -27,6 +28,14 @@ if (require.main === module) {
     console.log(`Server running on PORT: ${port}`);
   });
 }
+
+app.get("getStartup", async (req,res)=>{
+  const data = await startup.find({
+
+
+  })
+  res.json(data)
+})
 
 app.use(router)
 module.exports = app;
