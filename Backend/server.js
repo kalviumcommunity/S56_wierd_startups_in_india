@@ -29,7 +29,7 @@ if (require.main === module) {
   });
 }
 
-app.get("getstartup", async (req,res)=>{
+app.get("/getstartup", async (req,res)=>{
   const data = await startup.find({
 
 
