@@ -34,7 +34,7 @@ app.get("getstartup", async (req,res)=>{
 
 
   })
-  res.json(data)
+  res.send(data)
 })
 
 app.use(router)
