@@ -13,7 +13,7 @@ try{
 catch(error){
   console.log(error)
 }
-
+ 
 
 app.use(cors())
 app.get('/',(req,res)=>{
@@ -36,6 +36,14 @@ app.get("/getstartup", async (req,res)=>{
   })
   res.send(data)
 })
+
+app.post("/poststartup",async (req,res)=>{
+   startup.create(req.body)
+   .then((el)=>{
+    res.json(el)
+   })
+})
+
 
 app.use(router)
 module.exports = app;
