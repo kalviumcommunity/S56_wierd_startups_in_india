@@ -37,7 +37,7 @@ app.get("/getstartup", async (req,res)=>{
   res.send(data)
 })
 
-app.post("/poststartup",async (req,res)=>{
+app.post("/poststartup", (req,res)=>{
    startup.create(req.body)
    .then((el)=>{
     res.json(el)
