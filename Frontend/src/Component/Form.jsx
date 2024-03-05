@@ -13,7 +13,7 @@ const Form = () => {
 
     const Submit = (e)=>{
         e.preventDefault();
-        axios.post("https://s56-wierd-startups-in-india.onrender.com/poststartup",{company:factory,founder:inventor,product:material,description:summary,valuation:cost,status:condition})
+        axios.post("https://s56-wierd-startups-in-india.onrender.com/poststartup",{company:factory,founder:[inventor],product:material,description:summary,valuation:cost,status:condition})
         .then(result=>console.log(result))
         .catch(err=>console.log(err))
     
