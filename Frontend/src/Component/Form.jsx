@@ -3,17 +3,17 @@ import "./Form.css"
 import axios from "axios"
 const Form = () => {
  
-    const [company,setCompany]= useState()
-    const [founder,setFounder]= useState()
-    const [product,setProduct]= useState()
-    const [description,setDescription]= useState()
-    const [valuation,setValuation]= useState()
-    const [status,setStatus]= useState()
+    const [factory,setCompany]= useState()
+    const [inventor,setFounder]= useState()
+    const [material,setProduct]= useState()
+    const [summary,setDescription]= useState()
+    const [cost,setValuation]= useState()
+    const [condition,setStatus]= useState()
 
 
     const Submit = (e)=>{
         e.preventDefault();
-        axios.post("https://s56-wierd-startups-in-india.onrender.com/getstartup",{company,founder,product,description,valuation,status})
+        axios.post("https://s56-wierd-startups-in-india.onrender.com/poststartup",{company:factory,founder:inventor,product:material,description:summary,valuation:cost,status:condition})
         .then(result=>console.log(result))
         .catch(err=>console.log(err))
     
