@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './landingPage.css';
 import MenuIcon from '@mui/icons-material/Menu';
-
+import { Link } from 'react-router-dom';
 const Navbar = () => {
   const [startupData, setStartupData] = useState([]);
 
@@ -27,7 +27,7 @@ const Navbar = () => {
           <ul>
             <li>Home</li>
             <li>About</li>
-            <li>News</li>
+          <Link to={"/form"} ><li>Form</li></Link>  
           </ul>
         </div>
         <MenuIcon />
