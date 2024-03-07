@@ -10,6 +10,6 @@ valuation:String,
 status:String
 })
 
-const startups = mongoose.model("startups",startupSchema)
+const startups = mongoose.model("startup",startupSchema)
 
 module.exports= startups
