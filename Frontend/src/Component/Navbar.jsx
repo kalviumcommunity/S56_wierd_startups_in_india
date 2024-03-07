@@ -41,7 +41,7 @@ const Navbar = () => {
         {startupData.map((element) => (
           <div className='card' key={element._id}>
             <h1>Company: {element.company}</h1>
-            <h2>Founder: {element.founder.join(', ')}</h2>
+            <h2>Founder: {element.founder}</h2>
             <h3>Product: {element.product}</h3>
             <p>Description: {element.description}</p>
             <p>Valuation: {element.valuation}</p>

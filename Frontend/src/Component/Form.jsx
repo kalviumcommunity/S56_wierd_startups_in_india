@@ -3,31 +3,41 @@ import "./Form.css"
 import axios from "axios"
 const Form = () => {
  
-    const [factory,setCompany]= useState()
-    const [inventor,setFounder]= useState()
-    const [material,setProduct]= useState()
-    const [summary,setDescription]= useState()
-    const [cost,setValuation]= useState()
-    const [condition,setStatus]= useState()
+    const [factory,setfactory]= useState("")
+    const [inventor,setinventor]= useState("")
+    const [material,setmaterial]= useState("")
+    const [summary,setsummary]= useState("")
+    const [cost,setcost]= useState("")
+    const [condition,setcondition]= useState("")
 
 
+    console.log(factory , inventor , material , summary , cost , condition)
     const Submit = (e)=>{
         e.preventDefault();
-        axios.post("https://s56-wierd-startups-in-india.onrender.com/poststartup",{company:factory,founder:[inventor],product:material,description:summary,valuation:cost,status:condition})
-        .then(result=>console.log(result))
+        axios.post("https://s56-wierd-startups-in-india.onrender.com/poststartup",{
+            company:factory,
+            founder:[inventor],
+            product:material,
+            description:summary,
+            valuation:cost,
+            status:condition
+        
+        })
+        .then(result=>console.log(result.data))
         .catch(err=>console.log(err))
     
     }
+    
 
   return (
     <div>
       <form className='form'   onSubmit={Submit} >
-        <input type="text" placeholder='Company'  required  onChange={(e)=>setCompany(e.target.value)}  />
-        <input type="text" placeholder='Founder' required  onChange={(e)=>setFounder(e.target.value)}   />
-        <input type="text" placeholder='Product' required onChange={(e)=>setProduct(e.target.value)}   />
-        <input type="text" placeholder='Description' required onChange={(e)=>setDescription(e.target.value)}  />
-        <input type="text" placeholder='valuation' required  onChange={(e)=>setValuation(e.target.value)}  />
-        <input type="text" placeholder='status' required onChange={(e)=>setStatus(e.target.value)}  />
+        <input type="text" name="company" placeholder='Company'  required  onChange={(e)=>setfactory(e.target.value)}  />
+        <input type="text"  name="founder" placeholder='Founder' required  onChange={(e)=>setinventor(e.target.value)}   />
+        <input type="text" name="product" placeholder='Product' required onChange={(e)=>setmaterial(e.target.value)}   />
+        <input type="text" name="description" placeholder='Description' required onChange={(e)=>setsummary(e.target.value)}  />
+        <input type="text" name="valuation" placeholder='valuation' required  onChange={(e)=>setcost(e.target.value)}  />
+        <input type="text" name="status" placeholder='status' required onChange={(e)=>setcondition(e.target.value)}  />
          <button>Submit</button>
       </form>
     </div>

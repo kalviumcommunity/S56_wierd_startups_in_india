@@ -1,21 +1,21 @@
 const express = require('express');
-const app = express();
-const port = process.env.PORT || 3000;
 const {isConnectToDB,connectToDB}=require('./db')
-const cors = require("cors")
+const cors = require("cors") 
 const {router}=require("./routes")
 const startup = require ("./Model.js")
 
-try{
+const app = express();
+const port = process.env.PORT || 3000;
 
-  connectToDB()
-}
-catch(error){
-  console.log(error)
-}
- 
-
+app.use(express.json())
 app.use(cors())
+app.use(router)
+
+
+
+
+
+
 app.get('/',(req,res)=>{
   res.send(isConnectToDB()?"Connected to database succesfully" : "Not connected" )
 })
@@ -23,11 +23,7 @@ app.get('/',(req,res)=>{
 app.get('/ping',(req,res)=>{
   res.send("pong")
 })
-if (require.main === module) {
-  app.listen(port, () => {
-    console.log(`Server running on PORT: ${port}`);
-  });
-}
+
 
 app.get("/getstartup", async (req,res)=>{
   const data = await startup.find({
@@ -37,13 +33,18 @@ app.get("/getstartup", async (req,res)=>{
   res.send(data)
 })
 
-app.post("/poststartup", (req,res)=>{
-   startup.create(req.body)
+app.post("/poststartup",async (req,res)=>{
+  await startup.create(req.body)
    .then((el)=>{
     res.json(el)
    })
 })
 
+if (require.main === module) {
+  app.listen(port, () => {
+    connectToDB()
+    console.log(`Server running on PORT: ${port}`);
+  });
+}
 
-app.use(router)
 module.exports = app;
