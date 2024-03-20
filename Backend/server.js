@@ -36,10 +36,10 @@ app.post("/poststartup",async (req,res)=>{
 
 app.put("/Update/:_id",async (req,res)=>{
 //  console.log(req.body,"req.body aali ")
-    // console.log(req.params._id,req.body)
+    console.log(req.params._id,req.body)
 
   try {
-    let data = await startup.findByIdAndUpdate({_id:req.params._id}, req.body,{new:true})
+    let data = await startup.findByIdAndUpdate({_id:req.params._id}, req.body.data,{new:true})
    res.send(data)
   } catch (error) {
     console.log(error) 

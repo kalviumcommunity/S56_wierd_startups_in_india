@@ -13,8 +13,8 @@ const Update = () => {
     const [cost,setcost]= useState("")
     const [condition,setcondition]= useState("")
 
-     async function Submit (id){
-       await axios.put(`https://s56-wierd-startups-in-india.onrender.com/Update/${id}`,{
+     async function Submit (){
+       await axios.put(`https://s56-wierd-startups-in-india.onrender.com/Update/${_id}`,{
         
             data:{company:data.factory,
                 founder:[inventor],
