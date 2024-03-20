@@ -2,22 +2,34 @@ import React, { useState, useEffect } from 'react';
 import './landingPage.css';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 const Navbar = () => {
   const [startupData, setStartupData] = useState([]);
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch('https://s56-wierd-startups-in-india.onrender.com/getstartup');
+      const data = await response.json();
+      setStartupData(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://s56-wierd-startups-in-india.onrender.com/getstartup');
-        const data = await response.json();
-        setStartupData(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
 
     fetchData();
   }, []);
+
+  function HandleDelete(id){
+    console.log(id)
+     axios.delete(`https://s56-wierd-startups-in-india.onrender.com/delete/${id}`)
+     .then(()=>{
+      fetchData()
+     })
+     .catch((err)=>{
+      console.log(err)
+     })
+  }
 
   return (
     <div className='main'>
@@ -46,6 +58,8 @@ const Navbar = () => {
             <p>Description: {element.description}</p>
             <p>Valuation: {element.valuation}</p>
             <p>Status: {element.status}</p>
+            <Link to={`/Update/${element._id}`} ><button>Update</button></Link> 
+            <button  onClick={()=>{HandleDelete(element._id)}} >Delete</button>
           </div>
         ))}
       </div>

@@ -40,6 +40,24 @@ app.post("/poststartup",async (req,res)=>{
    })
 })
 
+app.put("/Update", (req,res)=>{
+ console.log(req.body,"req.body ali ")
+
+   startup.findByIdAndUpdate({_id:req.body.id}, req.body.data)
+  .then((el)=>{res.json(el)})
+  .catch((err)=>{
+    console.log(err)
+  })
+})
+
+app.delete("/delete/:id" , (req,res)=>{
+  console.log(req.params.id)
+  startup.findByIdAndDelete({_id:req.params.id})
+  .then((el)=>{
+    res.send(el)
+  })
+})
+
 if (require.main === module) {
   app.listen(port, () => {
     connectToDB()
