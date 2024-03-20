@@ -12,10 +12,6 @@ app.use(cors())
 app.use(router)
 
 
-
-
-
-
 app.get('/',(req,res)=>{
   res.send(isConnectToDB()?"Connected to database succesfully" : "Not connected" )
 })
@@ -26,10 +22,8 @@ app.get('/ping',(req,res)=>{
 
 
 app.get("/getstartup", async (req,res)=>{
-  const data = await startup.find({
-
-
-  })
+  console.log("hello")
+  const data = await startup.find({})
   res.send(data)
 })
 
@@ -40,14 +34,17 @@ app.post("/poststartup",async (req,res)=>{
    })
 })
 
-app.put("/Update", (req,res)=>{
- console.log(req.body,"req.body ali ")
+app.put("/Update/:_id",async (req,res)=>{
+//  console.log(req.body,"req.body aali ")
+    // console.log(req.params._id,req.body)
 
-   startup.findByIdAndUpdate({_id:req.body.id}, req.body.data)
-  .then((el)=>{res.json(el)})
-  .catch((err)=>{
-    console.log(err)
-  })
+  try {
+    let data = await startup.findByIdAndUpdate({_id:req.params._id}, req.body,{new:true})
+   res.send(data)
+  } catch (error) {
+    console.log(error) 
+  }
+  
 })
 
 app.delete("/delete/:id" , (req,res)=>{
