@@ -11,6 +11,7 @@ const Navbar = () => {
       const response = await fetch('https://s56-wierd-startups-in-india.onrender.com/getstartup');
       const data = await response.json();
       setStartupData(data);
+      console.log(data)
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -22,7 +23,7 @@ const Navbar = () => {
 
   function HandleDelete(id){
     console.log(id)
-     axios.delete(`https://s56-wierd-startups-in-india.onrender.com/delete/${id}`)
+     axios.delete(`http://s56-wierd-startups-in-india.onrender.com/delete/${id}`)  
      .then(()=>{
       fetchData()
      })

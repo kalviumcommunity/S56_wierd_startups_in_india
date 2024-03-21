@@ -1,6 +1,6 @@
 import React ,{useState}from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { useParams , useNavigate } from 'react-router-dom'
 const Update = () => {
 
     let {id}= useParams()
@@ -13,23 +13,25 @@ const Update = () => {
     const [cost,setcost]= useState("")
     const [condition,setcondition]= useState("")
 
-     async function Submit (){
-       await axios.put(`https://s56-wierd-startups-in-india.onrender.com/Update/${_id}`,{
-        
-            data:{company:data.factory,
-                founder:[inventor],
-                product:material,
-                description:summary,
-                valuation:cost,
-                status:condition
-            }
-        } )
-        .then((res)=>{
-            console.log(res.data.json)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
+    async function Submit (e){
+        e.preventDefault()
+       console.log('hello')
+        try {
+          let data = {
+            company: factory,
+            founder: [inventor],
+            product: material,
+            description: summary,
+            valuation: cost,
+            status: condition
+          }
+          console.log(data)
+          const response = await axios.put(`https://s56-wierd-startups-in-india.onrender.com/Update/${id}`,data)
+    
+                console.log(response,"hello")
+        } catch (error) {
+           console.log(error)
+        }
     }
 
   return (
