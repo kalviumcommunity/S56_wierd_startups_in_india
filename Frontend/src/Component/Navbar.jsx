@@ -22,8 +22,8 @@ const Navbar = () => {
   }, []);
 
   function HandleDelete(id){
-    console.log(id)
-     axios.delete(`http://s56-wierd-startups-in-india.onrender.com/delete/${id}`)  
+    console.log(id,"This is id")
+     axios.delete(`https://s56-wierd-startups-in-india.onrender.com/delete/${id}`)  
      .then(()=>{
       fetchData()
      })

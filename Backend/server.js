@@ -2,7 +2,8 @@ const express = require('express');
 const {isConnectToDB,connectToDB}=require('./db')
 const cors = require("cors") 
 const {router}=require("./routes")
-const startup = require ("./Model.js")
+const startup = require ("./Model.js");
+const { validateSignup } = require('./validator.jsx');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -28,6 +29,14 @@ app.get("/getstartup", async (req,res)=>{
 })
 
 app.post("/poststartup",async (req,res)=>{
+  const {error,value}= validateSignup(req.body)
+
+if(error){
+  console.log(error)
+  return res.send(error.details)
+}
+
+console.log("form validated succesfuly")
   await startup.create(req.body)
    .then((el)=>{
     res.json(el)
