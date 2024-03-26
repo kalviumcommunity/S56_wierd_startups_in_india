@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 import "./Form.css"
 import axios from "axios"
 const Form = () => {
@@ -42,7 +43,7 @@ const Form = () => {
         <input type="text" name="description" placeholder='Description' required onChange={(e)=>setsummary(e.target.value)}  />
         <input type="text" name="valuation" placeholder='valuation' required  onChange={(e)=>setcost(e.target.value)}  />
         <input type="text" name="status" placeholder='status' required onChange={(e)=>setcondition(e.target.value)}  />
-         <button>Submit</button>
+        <Link  to={"/"}> <button>Submit</button></Link>
       </form>
     </div>
   )

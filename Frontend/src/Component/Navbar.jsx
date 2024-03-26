@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 const Navbar = () => {
   const [startupData, setStartupData] = useState([]);
+ const [login,setLogin]=useState(false)
+
 
   const fetchData = async () => {
     try {
@@ -32,6 +34,29 @@ const Navbar = () => {
      })
   }
 
+
+
+   useEffect(()=>{
+  try {
+ function   checkLogin (){
+ setLogin(document.cookie.includes('username'))
+ }
+  checkLogin()
+  } catch (error) {
+    console.log(error)
+  }
+   },[])
+
+
+
+    const DeleteCookie=()=>{
+      document.cookie="username=; expires=Mon,07 April 2025 00:00:00 UTC;path=/;"
+      document.cookie="token;expires=Mon,01 April 2025 00:00:00 UTC;path=/;"
+      setLogin(false)
+    }
+
+    
+
   return (
     <div className='main'>
       <div className='top'>
@@ -42,8 +67,10 @@ const Navbar = () => {
             <li>About</li>
           <Link to={"/form"} ><li>Form</li></Link>  
           </ul>
-        </div>
-        <MenuIcon />
+        </div> 
+        {login ? <button  onClick={DeleteCookie} >Logout</button> : <Link to={"/Login"} > <button>login</button>  </Link> } 
+
+      
       </div>
 
       <div>

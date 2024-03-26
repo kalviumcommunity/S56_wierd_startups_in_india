@@ -1,6 +1,6 @@
 import React ,{useState}from 'react'
 import axios from 'axios'
-import { useParams , useNavigate } from 'react-router-dom'
+import { useParams , Link} from 'react-router-dom'
 const Update = () => {
 
     let {id}= useParams()
@@ -44,7 +44,7 @@ const Update = () => {
       <input type="text" name="description" placeholder='Description' required onChange={(e)=>setsummary(e.target.value)}  />
       <input type="text" name="valuation" placeholder='valuation' required  onChange={(e)=>setcost(e.target.value)}  />
       <input type="text" name="status" placeholder='status' required onChange={(e)=>setcondition(e.target.value)}  />
-       <button>Submit</button>
+      <Link to={"/"}> <button>Submit</button></Link>
     </form>
   </div>
   )
