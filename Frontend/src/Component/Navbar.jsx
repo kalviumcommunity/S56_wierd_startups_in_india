@@ -39,7 +39,16 @@ const Navbar = () => {
    useEffect(()=>{
   try {
  function   checkLogin (){
- setLogin(document.cookie.includes('username'))
+  let filtered = document.cookie.split(";").map((el,i)=>{
+    let a = el.split("=")
+    // console.log(a , a[0] , a[1].length)
+    if (a[1].length != 0){
+      // console.log(a[0])
+      return a[0]
+    }
+  })
+  console.log(filtered)
+ setLogin(filtered.includes('username'))
  }
   checkLogin()
   } catch (error) {
@@ -51,7 +60,7 @@ const Navbar = () => {
 
     const DeleteCookie=()=>{
       document.cookie="username=; expires=Mon,07 April 2025 00:00:00 UTC;path=/;"
-      document.cookie="token;expires=Mon,01 April 2025 00:00:00 UTC;path=/;"
+      // document.cookie="token;expires=Mon,01 April 2025 00:00:00 UTC;path=/;"
       setLogin(false)
     }
 

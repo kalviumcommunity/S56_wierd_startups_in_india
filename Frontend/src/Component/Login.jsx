@@ -1,34 +1,36 @@
-import { Link  } from 'react-router-dom'
+import { Link , useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import React from 'react'
 import axios from 'axios'
 
 
 const  Login = () => {
+
+  let navigate = useNavigate()
+
   const [name,setUserName]=useState("")
   const [userPassword,setUserPassword]=useState("")
   
-  const   submitbtn =(e)=>{
+  let submitbtn =(e)=>{
     e.preventDefault()
-    
-    axios.post("http://localhost:3200/login",{username:name,password:userPassword})
+    console.log("login clicked")
+    axios.post("https://s56-wierd-startups-in-india.onrender.com/login",{username:name,password:userPassword})
     .then((res)=>{
       document.cookie=`username=${name}`  
       console.log(document.cookie)
-    console.log(res) 
+      console.log(res)
+      navigate("/")
   })
   .catch((err)=>console.log(err))
 
  }
-
+  console.log(name , userPassword)
   return (
     <div>
       <form onSubmit={submitbtn} >
       <input type="text"   name='username' value={name}  onChange={(e)=>setUserName(e.target.value)} placeholder='Name'/>
       <input type="text"   name='password' value={userPassword} onChange={(e=>setUserPassword(e.target.value))} placeholder='password' />
-      <Link  to={"/"}>
-        <button  type='submit'  >Login </button>
-        </Link>
+        <button onClick={submitbtn}>LOGIN</button>
       </form>
     </div>
   )
