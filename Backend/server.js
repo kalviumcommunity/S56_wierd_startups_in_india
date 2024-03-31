@@ -29,8 +29,9 @@ app.get("/getstartup", async (req,res)=>{
 })
 
 app.post("/poststartup",async (req,res)=>{
+  
   const {error,value}= validateSignup(req.body)
-
+ console.log(value,req.body)
 if(error){
   console.log(error)
   return res.send(error.details)
@@ -41,6 +42,23 @@ console.log("form validated succesfuly")
    .then((el)=>{
     res.json(el)
    })
+})
+
+app.post("/login",async (req,res)=>{
+
+  try {
+    const {name,password}= req.body
+    // console.log(req.body)
+     const user ={
+      "username":name,
+      "password":password
+    }
+    res.send(user)
+
+  } catch (error) {
+    console.log(error)
+  }
+
 })
 
 app.put("/Update/:_id",async (req,res)=>{
