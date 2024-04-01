@@ -4,7 +4,7 @@ const cors = require("cors")
 const {router}=require("./routes")
 const startup = require ("./Model.js");
 const { validateSignup } = require('./validator.jsx');
-
+const jwt =  require('jsonwebtoken')
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -49,11 +49,10 @@ app.post("/login",async (req,res)=>{
   try {
     const {name,password}= req.body
     // console.log(req.body)
-     const user ={
-      "username":name,
-      "password":password
-    }
-    res.send(user)
+    const user ={name:name}
+     const accessToken = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
+     console.log(accessToken)
+    res.send(accessToken)
 
   } catch (error) {
     console.log(error)

@@ -14,14 +14,16 @@ const  Login = () => {
   let submitbtn =(e)=>{
     e.preventDefault()
     console.log("login clicked")
-    axios.post("https://s56-wierd-startups-in-india.onrender.com/login",{username:name,password:userPassword})
+    axios.post("http://localhost:3200/login",{username:name,password:userPassword})
     .then((res)=>{
       document.cookie=`username=${name}`  
       console.log(document.cookie)
-      console.log(res)
+      console.log(res.data)
+      document.cookie=`token=${res.data};expires=Mon,01 April 9999 00:00:00 UTC;path=/;`
+
       navigate("/")
   })
-  .catch((err)=>console.log(err))
+  .catch((err)=>console.log("there is error"))
 
  }
   console.log(name , userPassword)

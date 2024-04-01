@@ -38,12 +38,13 @@ const Navbar = () => {
 
    useEffect(()=>{
   try {
- function   checkLogin (){
+ function checkLogin (){
+  console.log(document.cookie.split(";")[0].split("=")[1].length , "cookie")
   let filtered = document.cookie.split(";").map((el,i)=>{
     let a = el.split("=")
     // console.log(a , a[0] , a[1].length)
     if (a[1].length != 0){
-      // console.log(a[0])
+      // console.log(a[0])  
       return a[0]
     }
   })
@@ -59,8 +60,8 @@ const Navbar = () => {
 
 
     const DeleteCookie=()=>{
-      document.cookie="username=; expires=Mon,07 April 2025 00:00:00 UTC;path=/;"
-      // document.cookie="token;expires=Mon,01 April 2025 00:00:00 UTC;path=/;"
+      document.cookie="username=; expires=Mon,07 April 2004 00:00:00 UTC;path=/;"
+      document.cookie="token=;expires=Mon,01 April 2005 00:00:00 UTC;path=/;"
       setLogin(false)
     }
 
@@ -69,7 +70,7 @@ const Navbar = () => {
   return (
     <div className='main'>
       <div className='top'>
-        <div className='title'><strong>Weird Startups</strong></div>
+        <div className='title'><strong>Weird Startups</strong></div> 
         <div className='home'>
           <ul>
             <li>Home</li>
