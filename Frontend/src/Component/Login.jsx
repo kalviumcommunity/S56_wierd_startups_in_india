@@ -18,10 +18,12 @@ const  Login = () => {
     .then((res)=>{
       document.cookie=`username=${name}`  
       console.log(document.cookie)
-      console.log(res)
+      console.log(res.data)
+      document.cookie=`token=${res.data};expires=Mon,01 April 9999 00:00:00 UTC;path=/;`
+
       navigate("/")
   })
-  .catch((err)=>console.log(err))
+  .catch((err)=>console.log("there is error"))
 
  }
   console.log(name , userPassword)
