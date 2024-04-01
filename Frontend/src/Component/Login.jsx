@@ -14,7 +14,7 @@ const  Login = () => {
   let submitbtn =(e)=>{
     e.preventDefault()
     console.log("login clicked")
-    axios.post("http://localhost:3200/login",{username:name,password:userPassword})
+    axios.post("https://s56-wierd-startups-in-india.onrender.com/login",{username:name,password:userPassword})
     .then((res)=>{
       document.cookie=`username=${name}`  
       console.log(document.cookie)
