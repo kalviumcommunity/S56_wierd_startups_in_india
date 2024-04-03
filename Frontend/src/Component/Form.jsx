@@ -1,38 +1,50 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState,useEffect } from 'react'
+import {  useNavigate } from 'react-router-dom';
 import "./Form.css"
 import axios from "axios"
+
+
 const Form = () => {
- 
+    const navigate = useNavigate()
     const [factory,setfactory]= useState("")
     const [inventor,setinventor]= useState("")
     const [material,setmaterial]= useState("")
     const [summary,setsummary]= useState("")
     const [cost,setcost]= useState("")
     const [condition,setcondition]= useState("")
+    const [createdBy, setCreatedBy] = useState("")
 
 
-    console.log(factory , inventor , material , summary , cost , condition)
-    const Submit = (e)=>{
-        e.preventDefault();
-        axios.post("https://s56-wierd-startups-in-india.onrender.com/poststartup",{
-            company:factory,
-            founder:[inventor],
-            product:material,
-            description:summary,
-            valuation:cost,
-            status:condition
-        
-        })
-        .then(result=>console.log(result.data))
-        .catch(err=>console.log(err))
+
+  const Submit = (e) => {
+    e.preventDefault();
     
+    const formData = {
+      company: factory,
+      founder: [inventor],
+      product: material,
+      description: summary,
+      valuation: cost,
+      status: condition,
+      createdby: createdBy
+    };
+  console.log(formData,"sagar data ")
 
-       
-        
-        
-    }
+    axios.post("https://s56-wierd-startups-in-india.onrender.com/poststartup", formData)
+      .then(result => console.log(result))
+      navigate("/")
+      .catch(err => console.log(err));
+
+
     
+  }
+  
+    
+  useEffect(() => {
+    const cookieValue = document.cookie.split(";")[0].split("=")[1];
+    console.log(cookieValue)
+    setCreatedBy(cookieValue);
+}, [])
 
   return (
     <div>
@@ -43,7 +55,7 @@ const Form = () => {
         <input type="text" name="description" placeholder='Description' required onChange={(e)=>setsummary(e.target.value)}  />
         <input type="text" name="valuation" placeholder='valuation' required  onChange={(e)=>setcost(e.target.value)}  />
         <input type="text" name="status" placeholder='status' required onChange={(e)=>setcondition(e.target.value)}  />
-        <Link  to={"/"}> <button>Submit</button></Link>
+         <button>Submit</button>
       </form>
     </div>
   )

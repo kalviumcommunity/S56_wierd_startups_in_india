@@ -23,7 +23,8 @@ const Update = () => {
             product: material,
             description: summary,
             valuation: cost,
-            status: condition
+            status: condition,
+            createdby:document.cookie.split(";")[0].split("=")[1] 
           }
           console.log(data)
           const response = await axios.put(`https://s56-wierd-startups-in-india.onrender.com/Update/${id}`,data)
