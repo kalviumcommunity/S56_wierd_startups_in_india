@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import "./Form.css"
 import axios from "axios"
@@ -10,6 +10,14 @@ const Form = () => {
     const [summary,setsummary]= useState("")
     const [cost,setcost]= useState("")
     const [condition,setcondition]= useState("")
+    const [createdBy, setCreatedBy] = useState("")
+
+
+    useEffect(() => {
+      const cookieValue = document.cookie.split(";")[0].split("=")[1];
+      console.log(cookieValue)
+      setCreatedBy(cookieValue);
+  }, [])
 
 
     console.log(factory , inventor , material , summary , cost , condition)
@@ -21,7 +29,8 @@ const Form = () => {
             product:material,
             description:summary,
             valuation:cost,
-            status:condition
+            status:condition,
+            createdby: createdBy
         
         })
         .then(result=>console.log(result.data))

@@ -3,9 +3,11 @@ import './landingPage.css';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-const Navbar = () => {
+const Navbar = () => {document.cookie.split(";")[0].split("=")[1] 
   const [startupData, setStartupData] = useState([]);
- const [login,setLogin]=useState(false)
+  const [login,setLogin]=useState(false)
+  const [UserData,setUserData]=useState([])
+  const [value,setvalue]=useState("all")
 
 
   const fetchData = async () => {
@@ -19,7 +21,11 @@ const Navbar = () => {
     }
   };
   useEffect(() => {
-
+    axios.get("https://s56-wierd-startups-in-india.onrender.com/getUserName")
+       .then((res)=>{
+        console.log(res)
+        setUserData(res.data)
+      })
     fetchData();
   }, []);
 
@@ -39,7 +45,7 @@ const Navbar = () => {
    useEffect(()=>{
   try {
  function checkLogin (){
-  console.log(document.cookie.split(";")[0].split("=")[1].length , "cookie")
+  console.log( "cookie")
   let filtered = document.cookie.split(";").map((el,i)=>{
     let a = el.split("=")
     // console.log(a , a[0] , a[1].length)
@@ -65,7 +71,18 @@ const Navbar = () => {
       setLogin(false)
     }
 
+    function onFilterValueChanged(e){
+      console.log(e.target.value)
+      setvalue(e.target.value)
+    }
+  
+    let filterData = value =="all"?startupData:startupData.filter((el,i)=>{
+      if(el.createdby==value){
+        return el
+      }
+    })
     
+
 
   return (
     <div className='main'>
@@ -77,7 +94,14 @@ const Navbar = () => {
             <li>About</li>
           <Link to={"/form"} ><li>Form</li></Link>  
           </ul>
-        </div> 
+          </div> 
+          <select name="isAvailable" onChange={onFilterValueChanged}>
+            <option value="all" >All</option>
+           {UserData.map((el,i)=>{
+            return <option value={el.name}> {el.name} </option>
+           })}
+          </select>
+      
         {login ? <button  onClick={DeleteCookie} >Logout</button> : <Link to={"/Login"} > <button>login</button>  </Link> } 
 
       
@@ -88,7 +112,7 @@ const Navbar = () => {
       </div>
 
       <div>
-        {startupData.map((element) => (
+        {filterData.map((element) => (
           <div className='card' key={element._id}>
             <h1>Company: {element.company}</h1>
             <h2>Founder: {element.founder}</h2>

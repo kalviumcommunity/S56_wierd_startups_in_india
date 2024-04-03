@@ -7,9 +7,16 @@ founder:Array,
 product:String,
 description:String,
 valuation:String,
-status:String
+status:String,
+createdby:String
 })
 
-const startups = mongoose.model("startup",startupSchema)
+const userSchema = new mongoose.Schema({
+    name:String
+})
 
-module.exports= startups
+
+const usermodel = mongoose.model("users",userSchema)
+const startup = mongoose.model("startup",startupSchema)
+
+module.exports= {usermodel,startup}

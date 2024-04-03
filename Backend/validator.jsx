@@ -9,7 +9,8 @@ const signupSchema = joi.object({
     product:joi.string().required(),
     description:joi.string().required(),
     valuation:joi.string().required(),
-    status:joi.string().required()
+    status:joi.string().required(),
+    createdby:joi.string().required()
 })
 
 exports.validateSignup = validator(signupSchema)

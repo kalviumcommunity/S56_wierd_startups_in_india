@@ -2,7 +2,7 @@ const express = require('express');
 const {isConnectToDB,connectToDB}=require('./db')
 const cors = require("cors") 
 const {router}=require("./routes")
-const startup = require ("./Model.js");
+const {usermodel,startup} = require ("./Model.js");
 const { validateSignup } = require('./validator.jsx');
 const jwt =  require('jsonwebtoken')
 const app = express();
@@ -31,7 +31,9 @@ app.get("/getstartup", async (req,res)=>{
 app.post("/poststartup",async (req,res)=>{
   
   const {error,value}= validateSignup(req.body)
- console.log(value,req.body)
+  
+  console.log(req.body)
+ console.log(value,req.body,"zingalala error messsage")
 if(error){
   console.log(error)
   return res.send(error.details)
@@ -47,15 +49,23 @@ console.log("form validated succesfuly")
 app.post("/login",async (req,res)=>{
 
   try {
-    const {name,password}= req.body
-    // console.log(req.body)
-    const user ={name:name}
-     const accessToken = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
-     console.log(accessToken)
-    res.send(accessToken)
+    const {username,password}= req.body
+    console.log(username)
+    const user ={name:username}
+
+    try {
+      await usermodel.create(user)
+      const accessToken = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
+      console.log(accessToken)
+      res.send(accessToken)
+      
+    } catch (error) {
+      console.log(error,"there is a error")
+    }
+
 
   } catch (error) {
-    console.log(error)
+    console.log(error,"there is a error")
   }
 
 })
@@ -81,6 +91,14 @@ app.delete("/delete/:id" , (req,res)=>{
     res.send(el)
   })
 })
+
+
+app.get("/getUserName", async (req,res)=>{
+  const data =  await usermodel.find({})
+  console.log(data)
+  res.send(data)
+})
+
 
 if (require.main === module) {
   app.listen(port, () => {
