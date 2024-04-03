@@ -30,7 +30,7 @@ const Form = () => {
     };
   console.log(formData,"sagar data ")
 
-    axios.post("http://localhost:3200/poststartup", formData)
+    axios.post("https://s56-wierd-startups-in-india.onrender.com/poststartup", formData)
       .then(result => console.log(result))
       navigate("/")
       .catch(err => console.log(err));
